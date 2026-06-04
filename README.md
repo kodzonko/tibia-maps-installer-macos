@@ -12,6 +12,13 @@ curl https://raw.githubusercontent.com/tibiamaps/tibia-maps-installer-macos/main
 
 ## Usage
 
+Use `--help` to list the available options:
+
+```
+$ ./install-tibia-maps --help
+Usage: install-tibia-maps [--help|--no-markers|--grid|--grid-no-markers|--grid-poi-markers]
+```
+
 By default, `install-tibia-maps` installs the Tibia maps files with markers included:
 
 ```

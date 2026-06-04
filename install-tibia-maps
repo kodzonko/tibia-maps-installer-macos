@@ -1,29 +1,47 @@
 #!/usr/bin/env bash
 
+usage() {
+	echo 'Usage: install-tibia-maps [--help|--no-markers|--grid|--grid-no-markers|--grid-poi-markers]';
+}
+
+if [ "$#" -gt 1 ]; then
+	usage >&2;
+	exit 1;
+fi;
+
 DEST_DIR="${HOME}/Library/Application Support/CipSoft GmbH/Tibia/packages/Tibia.app/Contents/Resources";
+if [ "$#" -eq 0 ]; then
+	echo 'Downloading & extracting `minimap-with-markers.zip`…';
+	url='https://tibiamaps.io/downloads/minimap-with-markers';
+else
+	case "${1}" in
+		--help)
+			usage;
+			exit 0;
+			;;
+		--grid)
+			echo 'Downloading & extracting `minimap-with-grid-overlay-and-markers.zip`…';
+			url='https://tibiamaps.io/downloads/minimap-with-grid-overlay-and-markers';
+			;;
+		--grid-no-markers)
+			echo 'Downloading & extracting `minimap-with-grid-overlay-without-markers.zip`…';
+			url='https://tibiamaps.io/downloads/minimap-with-grid-overlay-without-markers';
+			;;
+		--no-markers)
+			echo 'Downloading & extracting `minimap-without-markers.zip`…';
+			url='https://tibiamaps.io/downloads/minimap-without-markers';
+			;;
+		--grid-poi-markers)
+			echo 'Downloading & extracting `minimap-with-grid-overlay-and-poi-markers.zip`…';
+			url='https://tibiamaps.io/downloads/minimap-with-grid-overlay-and-poi-markers';
+			;;
+		*)
+			usage >&2;
+			exit 1;
+			;;
+	esac;
+fi;
 mkdir -p "${DEST_DIR}";
-case "${1}" in
-	--grid)
-		echo 'Downloading & extracting `minimap-with-grid-overlay-and-markers.zip`…';
-		url='https://tibiamaps.io/downloads/minimap-with-grid-overlay-and-markers';
-		;;
-	--grid-no-markers)
-		echo 'Downloading & extracting `minimap-with-grid-overlay-without-markers.zip`…';
-		url='https://tibiamaps.io/downloads/minimap-with-grid-overlay-without-markers';
-		;;
-	--no-markers)
-		echo 'Downloading & extracting `minimap-without-markers.zip`…';
-		url='https://tibiamaps.io/downloads/minimap-without-markers';
-		;;
-	--grid-poi-markers)
-		echo 'Downloading & extracting `minimap-with-grid-overlay-and-poi-markers.zip`…';
-		url='https://tibiamaps.io/downloads/minimap-with-grid-overlay-and-poi-markers';
-		;;
-	*)
-		echo 'Downloading & extracting `minimap-with-markers.zip`…';
-		url='https://tibiamaps.io/downloads/minimap-with-markers';
-		;;
-esac;
 zip_file_name="$(mktemp -t 'minimap-XXXXXX')";
 curl --progress-bar --location "${url}" > "${zip_file_name}";
 unzip -o -d "${DEST_DIR}" "${zip_file_name}";
