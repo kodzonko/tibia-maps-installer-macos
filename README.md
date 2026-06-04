@@ -28,6 +28,30 @@ Downloading & extracting `minimap-without-markers.zip`…
 ######################################################################## 100.0%
 ```
 
+Use the `--grid` option if you want the maps with grid overlay and markers:
+
+```
+$ ./install-tibia-maps --grid
+Downloading & extracting `minimap-with-grid-overlay-and-markers.zip`…
+######################################################################## 100.0%
+```
+
+Use the `--grid-no-markers` option if you want the maps with grid overlay but without markers:
+
+```
+$ ./install-tibia-maps --grid-no-markers
+Downloading & extracting `minimap-with-grid-overlay-without-markers.zip`…
+######################################################################## 100.0%
+```
+
+Use the `--grid-poi-markers` option if you want the maps with grid overlay and POI markers:
+
+```
+$ ./install-tibia-maps --grid-poi-markers
+Downloading & extracting `minimap-with-grid-overlay-and-poi-markers.zip`…
+######################################################################## 100.0%
+```
+
 Example cron job to update the maps daily at midnight:
 
 ```cron
